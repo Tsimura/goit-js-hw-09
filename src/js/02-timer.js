@@ -20,20 +20,16 @@ refs.btnStart.setAttribute('disabled', true);
 const options = {
   enableTime: true,
   time_24hr: true,
-  //Встановлює початкову вибрану дату.
-  // Якщо ви використовуєте mode: "multiple"або календар діапазону поставляти
-  // Arrayз Dateоб'єктів або масиву дат рядків , які слідують вашим dateFormat.
-  // В іншому випадку можна вказати один об’єкт Date або рядок дати.
   defaultDate: new Date(),
   minuteIncrement: 1,
 
   onClose(selectedDates) {
+    // refs.btnStart.addEventListener('click', setInterval);
     const currentDate = Date.now();
     if (currentDate > selectedDates[0]) {
       return alert('Please choose a date in the future');
     } else {
       refs.btnStart.removeAttribute('disabled');
-
       setInterval(() => {
         const timer = Date.now() - currentDate;
         const timeDifference = selectedDates[0] - currentDate;
@@ -44,6 +40,8 @@ const options = {
     }
   },
 };
+
+// function start(){}
 
 flatpickr('#datetime-picker', options);
 refs.btnStart.addEventListener('click', flatpickr);
@@ -56,13 +54,13 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = Math.floor(ms / day);
+  const days = addLeadingZero(Math.floor(ms / day));
   // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
+  const hours = addLeadingZero(Math.floor((ms % day) / hour));
   // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
   return { days, hours, minutes, seconds };
 }
