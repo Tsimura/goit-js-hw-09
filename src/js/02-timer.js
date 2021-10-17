@@ -27,21 +27,26 @@ const options = {
     // refs.btnStart.addEventListener('click', setInterval);
     const currentDate = Date.now();
     if (currentDate > selectedDates[0]) {
-      return alert('Please choose a date in the future');
+      return Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       refs.btnStart.removeAttribute('disabled');
       setInterval(() => {
         const timer = Date.now() - currentDate;
         const timeDifference = selectedDates[0] - currentDate;
         const { days, hours, minutes, seconds } = convertMs(timeDifference - timer);
-        console.log('Зворотній відлік часу:', `${days}:${hours}:${minutes}:${seconds}`);
-        updateTimer({ days, hours, minutes, seconds });
+        if (timeDifference - timer > 0) {
+          console.log('Зворотній відлік часу:', `${days}:${hours}:${minutes}:${seconds}`);
+          updateTimer({ days, hours, minutes, seconds });
+          console.log(timeDifference - timer);
+        } else {
+          return;
+        }
       }, 1000);
     }
   },
 };
 
-// function start(){}
+// function start() {}
 
 flatpickr('#datetime-picker', options);
 refs.btnStart.addEventListener('click', flatpickr);
