@@ -16,12 +16,12 @@ function launchRandomColor() {
   timerId = setInterval(() => {
     document.body.style.background = `${getRandomHexColor()}`;
     btnStart.setAttribute('disabled', true);
-    btnStop.removeAttribute('disabled', true);
+    btnStop.removeAttribute('disabled');
   }, 1000);
 }
 
 function stopRandomColor() {
   clearInterval(timerId);
-  btnStart.removeAttribute('disabled', true);
+  btnStart.removeAttribute('disabled');
   btnStop.setAttribute('disabled', true);
 }
