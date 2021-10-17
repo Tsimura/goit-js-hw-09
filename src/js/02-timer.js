@@ -16,6 +16,7 @@ const refs = {
 };
 
 refs.btnStart.setAttribute('disabled', true);
+refs.btnStart.classList.add('button');
 
 const options = {
   enableTime: true,
@@ -37,7 +38,7 @@ const options = {
         if (timeDifference - timer > 0) {
           console.log('Зворотній відлік часу:', `${days}:${hours}:${minutes}:${seconds}`);
           updateTimer({ days, hours, minutes, seconds });
-          console.log(timeDifference - timer);
+          // console.log(timeDifference - timer);
         } else {
           return;
         }
