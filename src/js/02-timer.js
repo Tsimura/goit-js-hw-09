@@ -24,12 +24,15 @@ const options = {
   minuteIncrement: 1,
 
   onClose(selectedDates) {
-    // refs.btnStart.addEventListener('click', setInterval);
+    // console.log('1');
     const currentDate = Date.now();
     if (currentDate > selectedDates[0]) {
       return Notiflix.Notify.failure('Please choose a date in the future');
-    } else {
-      refs.btnStart.removeAttribute('disabled');
+    }
+    refs.btnStart.removeAttribute('disabled');
+    refs.btnStart.addEventListener('click', () => {
+      // console.log('123');
+
       setInterval(() => {
         const timer = Date.now() - currentDate;
         const timeDifference = selectedDates[0] - currentDate;
@@ -42,11 +45,9 @@ const options = {
           return;
         }
       }, 1000);
-    }
+    });
   },
 };
-
-// function start() {}
 
 flatpickr('#datetime-picker', options);
 refs.btnStart.addEventListener('click', flatpickr);
@@ -80,5 +81,3 @@ function updateTimer({ days, hours, minutes, seconds }) {
   refs.minutes.textContent = `${minutes}`;
   refs.seconds.textContent = `${seconds}`;
 }
-
-// https://github.com/goitacademy/javascript-homework/tree/main/v2/09
