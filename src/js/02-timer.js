@@ -33,7 +33,7 @@ const options = {
     refs.btnStart.addEventListener('click', () => {
       // console.log('123');
 
-      setInterval(() => {
+      const start = setInterval(() => {
         const timer = Date.now() - currentDate;
         const timeDifference = selectedDates[0] - currentDate;
         const { days, hours, minutes, seconds } = convertMs(timeDifference - timer);
@@ -42,7 +42,8 @@ const options = {
           updateTimer({ days, hours, minutes, seconds });
           // console.log(timeDifference - timer);
         } else {
-          return;
+          clearInterval(start);
+          return Notiflix.Notify.success('Time is up!');
         }
       }, 1000);
     });
