@@ -47,7 +47,7 @@ function onError(error) {
   console.log(error);
 }
 
-function onFormSubmit(delay, step, amount) {
+function onFormSubmit(event) {
   event.preventDefault();
   const formElement = event.currentTarget.elements;
   const delayEl = formElement.delay.value;
