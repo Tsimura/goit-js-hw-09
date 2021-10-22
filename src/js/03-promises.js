@@ -9,6 +9,7 @@ const ref = {
 ref.form.addEventListener('submit', onFormSubmit);
 
 let DELAY = 1000;
+
 function createPromise(position, delay) {
   // for (let i = 0; i < position; i += 1) {
   // console.log(i);
@@ -64,18 +65,6 @@ function onFormSubmit(event) {
   ref.form.reset();
 }
 
-// function position({ delayEl, stepEl, amountEl }) {
-//   for (let i = 0; i < amountEl; i += 1) {
-//     onFormSubmit();
-//     let amountEl = 1;
-//     amountEl += i;
-//     // delayEl += stepEl;
-//     console.log('amount:', amountEl);
-//     console.log(delayEl);
-//     console.log(stepEl);
-//   }
-// }
-
 // createCunter(5);
 // function createCunter(amount) {
 //   // makeDelay(1, 1, 2);
@@ -89,8 +78,4 @@ function onFormSubmit(event) {
 //     });
 //     // delay += amount;
 //   }
-// }
-
-// function getSolution() {
-//   return Math.random() > 0.3;
 // }
