@@ -6,96 +6,91 @@ const ref = {
   btn: document.querySelector('button[type="submit"]'),
 };
 
-// ref.form.addEventListener('submit', onFormSubmit);
+ref.form.addEventListener('submit', onFormSubmit);
 
+let DELAY = 1000;
 function createPromise(position, delay) {
+  // for (let i = 0; i < position; i += 1) {
+  // console.log(i);
+  console.log('DELAY:', DELAY);
+  // DELAY += position;
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
-    // const delay = 1000;
+
     setTimeout(() => {
-      // if (shouldResolve) {
-      resolve({ position, delay });
-      // }
-      // else {
-      //   reject(`❌ Rejected promise ${position} in ${delay}ms`);
-      // }
-    }, delay);
+      if (shouldResolve) {
+        resolve('✅ Fulfilled promise! ');
+      } else {
+        reject('❌ Rejected promise!');
+      }
+    }, DELAY);
   });
+  // }
 }
 
-createCunter(5);
-function createCunter(amount) {
-  makeDelay(1, 1, 2);
-  for (let i = 0; i < amount; i += 1) {
-    let amount = 1;
-    amount += i;
-    // console.log(amount);
-
-    createPromise(2, 1500).then(({ position, delay }) => {
-      console.log(`✅ Fulfilled promise ${amount} in ${i}ms`);
-    });
-    // delay += amount;
+// setPromises(5);
+function setPromises(v, delay) {
+  for (let i = 0; i < v; i += 1) {
+    // console.log(i);
+    DELAY += 1000;
+    createPromise().then(onSuccess).catch(onError);
   }
 }
 
-// makeDelay(0, 1, 2);
-function makeDelay(delay, step, amount) {
-  for (let i = 0; i < amount; i += 1) {
-    delay += step;
-    console.log(delay);
-  }
+// createPromise(4).then(onSuccess).catch(onError);
+
+function onSuccess(result) {
+  console.log(result);
 }
-// createPromise(2, 1500).then(({ position, delay }) => {
-//   console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-// });
 
-// function onMakeSuccess(result) {
-//   console.log(`✅ Fulfilled promise `);
+function onError(error) {
+  console.log(error);
+}
+
+function onFormSubmit(delay, step, amount) {
+  event.preventDefault();
+  const formElement = event.currentTarget.elements;
+  const delayEl = formElement.delay.value;
+  const stepEl = formElement.step.value;
+  const amountEl = formElement.amount.value;
+  const formData = { delayEl, stepEl, amountEl };
+  // DELAY = delayEl;
+  console.log('formData:', formData);
+  console.log('delayEl:', delayEl);
+  console.log('stepEl:', stepEl);
+  console.log('amountEl:', amountEl);
+
+  setPromises(5);
+  ref.form.reset();
+}
+
+// function position({ delayEl, stepEl, amountEl }) {
+//   for (let i = 0; i < amountEl; i += 1) {
+//     onFormSubmit();
+//     let amountEl = 1;
+//     amountEl += i;
+//     // delayEl += stepEl;
+//     console.log('amount:', amountEl);
+//     console.log(delayEl);
+//     console.log(stepEl);
+//   }
 // }
 
-// function onMakeError(error) {
-//   console.log(`❌ Rejected promise `);
-// }
+// createCunter(5);
+// function createCunter(amount) {
+//   // makeDelay(1, 1, 2);
+//   for (let i = 0; i < amount; i += 1) {
+//     let amount = 1;
+//     amount += i;
+//     // console.log(amount);
 
-// function onFormSubmit(event) {
-//   event.preventDefault();
-//   const formElement = event.currentTarget.elements;
-//   const delayEl = formElement.delay.value;
-//   const stepEl = formElement.step.value;
-//   const amountEl = formElement.amount.value;
-//   const formData = { delayEl, stepEl, amountEl };
-//   // console.log(delayEl);
-//   // console.log(stepEl);
-//   // console.log(amountEl);
-//   // console.log(formData);
-
-//   // createPromise(2).then(onMakeSuccess).catch(onMakeError);
+//     createPromise(2, 1500).then(({ position, delay }) => {
+//       console.log(`✅ Fulfilled promise ${amount} in ${i + 1}ms`);
+//     });
+//     // delay += amount;
+//   }
 // }
 
 // function getSolution() {
 //   return Math.random() > 0.3;
 // }
-
-//Матеріал із завдання!!!
-// function createPromise(position, delay) {
-//   const shouldResolve = Math.random() > 0.3;
-//   if (shouldResolve) {
-//     // Fulfill
-//   } else {
-//     // Reject
-//   }
-// }
-
-// createPromise(2, 1500)
-//   .then(({ position, delay }) => {
-//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-//   })
-//   .catch(({ position, delay }) => {
-//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-//   });
-
-// console.log(ref.form);
-// console.log(ref.firstDelay);
-// console.log(ref.delayStep);
-// console.log(ref.amount);
-// console.log(ref.btn);
