@@ -23,53 +23,35 @@ function onFormSubmit(event) {
   setPromises(delayEl, stepEl, amountEl);
 
   ref.form.reset();
-  // DELAY = 0;
+  DELAY = 0;
 }
 
 let DELAY = 0;
 
 function createPromise(position, DELAY) {
-  // console.log('Затримка:', DELAY);
-
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
 
     setTimeout(() => {
-      // console.log('DELAY:', DELAY);
       if (shouldResolve) {
-        resolve(
-          console.log('DELAY:', DELAY),
-          // '✅ Fulfilled promise! ',
-        );
+        resolve('✅ Fulfilled promise! ');
       } else {
         reject('❌ Rejected promise!');
       }
     }, DELAY);
   });
 }
-// console.log(DELAY);
-// function createDalay(delay, step, amount) {
-//   const values = Object.values({ delay, step, amount });
-//   // console.log(values);
-//   let delayValue = 0;
-
-//   for (const value of values) {
-//     delayValue += value;
-//     console.log('delayValue:', delayValue);
-//   }
-//   return delayValue;
-// }
 
 function setPromises(delay, step, amount) {
   const values = Object.values({ delay, step, amount });
+  let firstDelay = delay;
+  DELAY = delay;
+  console.log('firstDelay:', firstDelay);
 
   for (let i = 0; i < amount; i += 1) {
-    // console.log(i);
-    // delayValue += step;
-
     DELAY += step;
     let delayValue = DELAY;
-    // console.log('DELAY:', DELAY);
+    console.log('DELAY:', DELAY);
 
     createPromise(i, DELAY)
       .then((position, delay) => {
@@ -89,19 +71,4 @@ function setPromises(delay, step, amount) {
 
 // function onError(error) {
 //   console.log(error);
-// }
-
-// createCunter(5);
-// function createCunter(amount) {
-//   // makeDelay(1, 1, 2);
-//   for (let i = 0; i < amount; i += 1) {
-//     let amount = 1;
-//     amount += i;
-//     // console.log(amount);
-
-//     createPromise(2, 1500).then(({ position, delay }) => {
-//       console.log(`✅ Fulfilled promise ${amount} in ${i + 1}ms`);
-//     });
-//     // delay += amount;
-//   }
 // }
