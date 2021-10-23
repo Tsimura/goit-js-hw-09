@@ -11,9 +11,7 @@ ref.form.addEventListener('submit', onFormSubmit);
 let DELAY = 1000;
 
 function createPromise(position, delay) {
-  // for (let i = 0; i < position; i += 1) {
-  // console.log(i);
-  console.log('DELAY:', DELAY);
+  console.log('Current DELAY:', DELAY);
   // DELAY += position;
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
@@ -26,10 +24,8 @@ function createPromise(position, delay) {
       }
     }, DELAY);
   });
-  // }
 }
 
-// setPromises(5);
 function setPromises(v, delay) {
   for (let i = 0; i < v; i += 1) {
     // console.log(i);
@@ -37,8 +33,6 @@ function setPromises(v, delay) {
     createPromise().then(onSuccess).catch(onError);
   }
 }
-
-// createPromise(4).then(onSuccess).catch(onError);
 
 function onSuccess(result) {
   console.log(result);
@@ -51,18 +45,31 @@ function onError(error) {
 function onFormSubmit(event) {
   event.preventDefault();
   const formElement = event.currentTarget.elements;
-  const delayEl = formElement.delay.value;
-  const stepEl = formElement.step.value;
-  const amountEl = formElement.amount.value;
+  const delayEl = parseInt(formElement.delay.value);
+  const stepEl = parseInt(formElement.step.value);
+  const amountEl = parseInt(formElement.amount.value);
   const formData = { delayEl, stepEl, amountEl };
-  // DELAY = delayEl;
-  console.log('formData:', formData);
-  console.log('delayEl:', delayEl);
-  console.log('stepEl:', stepEl);
-  console.log('amountEl:', amountEl);
 
-  setPromises(5);
+  console.log('formData:', formData);
+  // console.log('delayEl:', delayEl);
+  // console.log('stepEl:', stepEl);
+  // console.log('amountEl:', amountEl);
+
+  createDalay(delayEl, stepEl, amountEl);
+  setPromises(amountEl);
+
   ref.form.reset();
+}
+
+function createDalay(delay, step, amount) {
+  const values = Object.values({ delay, step, amount });
+  console.log(values);
+  let delayValue = 0;
+
+  for (const value of values) {
+    delayValue += value;
+    console.log(delayValue);
+  }
 }
 
 // createCunter(5);
