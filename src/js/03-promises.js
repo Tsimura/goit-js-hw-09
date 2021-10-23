@@ -48,17 +48,17 @@ function createPromise(position, DELAY) {
   });
 }
 // console.log(DELAY);
-function createDalay(delay, step, amount) {
-  const values = Object.values({ delay, step, amount });
-  // console.log(values);
-  let delayValue = 0;
+// function createDalay(delay, step, amount) {
+//   const values = Object.values({ delay, step, amount });
+//   // console.log(values);
+//   let delayValue = 0;
 
-  for (const value of values) {
-    delayValue += value;
-    console.log('delayValue:', delayValue);
-  }
-  return delayValue;
-}
+//   for (const value of values) {
+//     delayValue += value;
+//     console.log('delayValue:', delayValue);
+//   }
+//   return delayValue;
+// }
 
 function setPromises(delay, step, amount) {
   const values = Object.values({ delay, step, amount });
@@ -66,6 +66,7 @@ function setPromises(delay, step, amount) {
   for (let i = 0; i < amount; i += 1) {
     // console.log(i);
     // delayValue += step;
+
     DELAY += step;
     let delayValue = DELAY;
     // console.log('DELAY:', DELAY);
