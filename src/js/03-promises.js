@@ -18,8 +18,7 @@ function onFormSubmit(event) {
   const amountEl = parseInt(formElement.amount.value);
   const formData = { delayEl, stepEl, amountEl };
 
-  console.log('formData:', formData);
-
+  // console.log('formData:', formData);
   setPromises(delayEl, stepEl, amountEl);
 
   ref.form.reset();
@@ -43,32 +42,28 @@ function createPromise(position, DELAY) {
 }
 
 function setPromises(delay, step, amount) {
-  const values = Object.values({ delay, step, amount });
   let firstDelay = delay;
-  DELAY = delay;
-  console.log('firstDelay:', firstDelay);
+
+  // console.log('firstDelay:', firstDelay);
 
   for (let i = 0; i < amount; i += 1) {
-    DELAY += step;
+    if (i == 0) {
+      DELAY = delay;
+    } else {
+      DELAY += step;
+    }
+
     let delayValue = DELAY;
-    console.log('DELAY:', DELAY);
+    // console.log('DELAY:', DELAY);
 
     createPromise(i, DELAY)
       .then((position, delay) => {
-        console.log(`✅ Fulfilled promise ${i + 1} in ${delayValue}ms`);
+        // console.log(`✅ Fulfilled promise ${i + 1} in ${delayValue}ms`);
         Notiflix.Notify.success(`Fulfilled promise ${i + 1} in ${delayValue}ms`);
       })
       .catch((position, delay) => {
-        console.log(`❌ Rejected promise ${i + 1} in ${delayValue}ms`);
+        // console.log(`❌ Rejected promise ${i + 1} in ${delayValue}ms`);
         Notiflix.Notify.failure(`Rejected promise ${i + 1} in ${delayValue}ms`);
       });
   }
 }
-
-// function onSuccess(result) {
-//   console.log(result);
-// }
-
-// function onError(error) {
-//   console.log(error);
-// }
